@@ -438,11 +438,16 @@ dimensional as well.  We now describe its structure block–by–block.
 \begin{theorem}[Structure of \(A_1\)]\label{thm:A1-structure}
 Relative to the pair \((A,B)\) the inclusion matrix of \(A\subseteq A_1\)
 is the \emph{Gram matrix} \(H^{\!\top}H\).  Concretely,
+each summand \(M_{n_i}(\mathbb{C})\) of \(A\) embeds into \(A_1\), and for
+every \(j\) the block \(M_{m_j}(\mathbb{C})\) occurs inside \(A_1\) with
+multiplicity $\sum_{i=1}^{s}h_{ij}^{\,2}$.  Equivalently,
 \[
-   A_1 \cong 
-   \bigoplus_{i=1}^{s}
-   M_{n_i}(\mathbb{C})\oplus 
-   \bigoplus_{j=1}^{r} h_{ij}^{\,2}\,M_{m_j}(\mathbb{C}).
+   A_1 \cong
+   \Biggl(\bigoplus_{i=1}^{s}
+            M_{n_i}(\mathbb{C})\Biggr)
+   \oplus
+   \Biggl(\bigoplus_{j=1}^{r}
+            \Bigl(\sum_{i=1}^{s}h_{ij}^{\,2}\Bigr)M_{m_j}(\mathbb{C})\Biggr).
 \]
 \end{theorem}
 
@@ -451,10 +456,10 @@ For each pair $(i,j)$ the corner $e_{ij}^{\,\ell}M_{n_i}e_{ij}^{\,\ell}$ is
 $\ast$–isomorphic to $M_{m_j}$.  Products
 $a_1e_Ba_2$ with $a_k\in M_{n_i}$ are supported on those corners,
 and the Jones relations force exactly $h_{ij}^{\,2}$ copies of
-$M_{m_j}$ to appear.  A direct matrix computation
-shows that the multiplicity of the $i$–th simple block of $A$
-inside $A_1$ is $\sum_{j}h_{ij}^{\,2}$,
-i.e. the $(i,i)$-entry of $H^{\!\top}H$.
+$M_{m_j}$ to appear.  Summing over $i$ shows that the multiplicity of the
+$j$–th block $M_{m_j}$ inside $A_1$ is $\sum_{i}h_{ij}^{\,2}$, while a direct
+matrix computation gives the same expression for the multiplicity of the
+$i$–th block $M_{n_i}$.  These numbers form the diagonal of $H^{\!\top}H$.
 \end{proof}
 
 \paragraph{Index of the inclusion.}
@@ -652,56 +657,55 @@ orthonormal basis (UOB) in the simple corner
 and then replicate it block-wise.  From now on we write
 \(A=M_n(\bbC)\) and \(B=B_0\).
 
-\paragraph{Step 2: pick two special unitaries \(U,V\).}
-Set \(d=r\) (number of minimal projections in \(B\)).
-Let \(\omega:=e^{2\pi i/d}\).
-Define  
+\paragraph{Step 2: pick a cyclic shift unitary.}
+Set \(d=r\) (the number of minimal projections in \(B\)).
+Let \(V\in M_d(\bbC)\) be the permutation matrix implementing the cyclic
+shift \(e_k\mapsto e_{k+1}\) (indices modulo \(d\)); explicitly,
+\(V_{k,\ell}=1\) when \(\ell\equiv k+1\pmod d\) and \(0\) otherwise.
+It is a unitary satisfying \(V^d=I_d\).
 
-\[
-  U:=\diag(1,\omega,\omega^2,\dots,\omega^{d-1})
-      \in M_d(\bbC),
-  \quad
-  V:=(v_{kl})_{k,l=0}^{d-1},\; v_{kl}:=\frac1{\sqrt d}\,\omega^{kl}
-      \in M_d(\bbC).
-\]
-\begin{itemize}
-  \item \(U\) is diagonal and unitary;  
-  \item \(V\) is the (\(d\times d\)) discrete Fourier matrix, hence unitary;  
-  \item \(VU=\omega\,UV\) (a one-dimensional Weyl relation).
-\end{itemize}
-
-\paragraph{Step 3: define the “quasi–circulant” family.}
+\paragraph{Step 3: define the quasi–circulant family.}
 For each \(t=0,\dots,d-1\) put
 \[
-  W_t:=V^{\,t}\,U^{\,t}\in M_d(\bbC).
+  W_t:=V^{\,t}\in M_d(\bbC).
 \]
-Because \(UV=\omega^{-1}VU\) and \(\omega^d=1\),
- the set \(\{W_t : 0\le t<d\}\) is \emph{closed under multiplication}: \(W_sW_t=\omega^{st}W_{s+t}\).
+The products obey \(W_sW_t=W_{s+t}\) (indices taken modulo \(d\)),
+so the family is closed under multiplication.
 
 \paragraph{Step 4: orthonormality with respect to \(E\).}
-Identify \(B\) with the diagonal subalgebra of \(A=M_d(\bbC)\). 
-The trace–preserving expectation is
-\(E(X)=\frac1d\Tr(X)\,I_d\) (\(\Tr=\) ordinary matrix-trace).
+Identify \(B\) with the diagonal subalgebra of \(A=M_d(\bbC)\).
+The trace–preserving expectation is the diagonal map
+\(
+  E(X)=\operatorname{diag}(X_{11},\dots,X_{dd})
+\).
 For \(s,t\in\{0,\dots,d-1\}\),
 \[
   E(W_s^*W_t)
-  = 
-  \frac1d\Tr\bigl(W_{t-s}\bigr)\,I_d
-  = 
+  =E(V^{t-s})
+  =
   \begin{cases}
-    I_d &\text{if }s=t,\\[4pt]
+    I_d &\text{if }s=t,\\[2pt]
     0   &\text{if }s\ne t,
   \end{cases}
 \]
-because \(\Tr(W_k)=0\) whenever \(k\not\equiv0\pmod d\).  
-Hence the \(W_t\)’s are orthonormal over \(B\).
+because the permutation matrix \(V^{t-s}\) has zero diagonal whenever
+\(t\not\equiv s\pmod d\).
+Thus the \(W_t\) form an orthonormal family over \(B\).
 
 \paragraph{Step 5: unitarity and spanning.}
-Each \(W_t\) is a product of two unitaries, hence unitary.
-Since \(M_d(\bbC)\) has dimension \(d^2\) over \(\bbC\) and
-\(\{W_t b : 0\le t<d,\;b\in\mathrm{diag}(\mathbb{C}^d)\}\) consists of
-\(d\cdot d=d^2\) linearly independent vectors, 
-the family \(\{W_t\}_{t=0}^{d-1}\) spans \(A\) as a right \(B\)-module.
+Every \(W_t\) is unitary.  For \(X\in M_d(\bbC)\) the reconstruction
+formula for a unitary orthonormal basis requires
+\(
+  \sum_{t=0}^{d-1} W_t\,E(W_t^*X)=X
+\).
+Checking on matrix units \(E_{ab}\) we find
+\(E(V^{-t}E_{ab})=\delta_{t,\,a-b}\,E_{bb}\) (indices modulo \(d\)),
+whence
+\(
+  \sum_t W_t E(W_t^*E_{ab})=V^{a-b}E_{bb}=E_{ab}
+\).
+By linearity the identity holds for all \(X\), so the family
+\(\{W_t\}_{t=0}^{d-1}\) spans \(A\) as a right \(B\)-module.
 
 \paragraph{Step 6: conclusion for the abelian corner.}
 Thus \(\{W_t\}_{t=0}^{d-1}\) is a unitary orthonormal basis of \(A=M_n(\bbC)\)
@@ -754,14 +758,14 @@ and the Markov–trace–preserving \(E\) becomes
 a unitary orthonormal basis
 \(\{W_t\}_{t=0}^{N-1}\subset M_N(\bbC)\)
 for the inclusion \(\bbC^N\subset M_N(\bbC)\)
-with respect to the normalized trace on \(M_N\).  Equivalently
+with respect to the trace-preserving diagonal expectation.  Equivalently
 
 \[
   E_N\bigl(W_s^*W_t\bigr)
   =\delta_{st}\,I_N, \quad
   W_t\in M_N(\bbC),
 \]
-where \(E_N(y)=\tfrac1N\Tr_N(y)\,I_N\).
+where \(E_N(y)=\operatorname{diag}(y_{11},\dots,y_{NN})\).
 
 \medskip
 \noindent\textbf{Step 3: Lift to a basis of \(A\) over \(B\).} Define
