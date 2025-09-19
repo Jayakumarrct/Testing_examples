@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The Jones basic construction for \(B\subseteq A\)}{5}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Need things from Bachi and Bhat paper}{7}{section.2}%
+\contentsline {section}{\numberline {3}Finite–Dimensional setup \& main results (Bakshi–Bhat)}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Abelian corner: existence of a unitary orthonormal basis}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Simple corner: the case $B=M_m(\mathbb {C})$ \& $E$ Markov}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Dual case: $A=M_n(\mathbb {C})$ \& $E$ normalized trace}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Weyl–type families when $B$ is abelian}{10}{subsection.3.4}%
+\contentsline {section}{\numberline {4}$\mathbb {C}\oplus M_{2}(\mathbb {C})\subset M_{3}(\mathbb {C})\oplus M_{9}(\mathbb {C})$: a $2\times 2$ inclusion of index $18$}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Path–algebra realisation of the tower}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}First Jones basic construction}{16}{subsection.4.2}%

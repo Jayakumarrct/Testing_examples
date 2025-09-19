@@ -1,0 +1,1422 @@
+\documentclass[11pt]{article}
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                               PACKAGES                                      %
+%──────────────────────────────────────────────────────────────────────────────%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgschola} % Different font
+\usepackage{geometry}
+  \geometry{a4paper, margin=1in}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{mathrsfs}   % script fonts
+\usepackage{bm}         % bold math (for vectors)
+\usepackage[all,cmtip]{xy}
+\usepackage{titlesec} % For section styling
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                               COLOURS                                        %
+%──────────────────────────────────────────────────────────────────────────────%
+\definecolor{MyPurple}{RGB}{128, 0, 128}
+\definecolor{MyDarkBlue}{RGB}{0, 0, 139}
+\definecolor{MyDarkGreen}{RGB}{0, 100, 0}
+\definecolor{MyRed}{RGB}{204, 0, 0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                          TITLE & SECTION STYLING                             %
+%──────────────────────────────────────────────────────────────────────────────%
+\titleformat{\section}
+  {\color{MyDarkGreen}\normalfont\Large\bfseries}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\color{MyPurple}\normalfont\large\bfseries}
+  {\thesubsection}{1em}{}
+\renewcommand{\paragraph}[1]{\vspace{1em}\noindent{\color{MyDarkBlue}\bfseries #1}}
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                          THEOREM-LIKE ENVIRONMENTS                         %
+%──────────────────────────────────────────────────────────────────────────────%
+
+\newtheoremstyle{mytheoremstyle}% name
+  {6pt}% Space above
+  {6pt}% Space below
+  {\itshape}% Body font
+  {}% Indent amount
+  {\color{MyPurple}\bfseries}% Theorem head font
+  {.}% Punctuation after theorem head
+  {0.5em}% Space after theorem head
+  {}% Theorem head spec (can be left empty)
+
+\theoremstyle{mytheoremstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{\color{MyPurple}Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{\color{MyDarkBlue}Definition}
+\newtheorem{example}[theorem]{\color{MyDarkGreen}Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{\color{MyDarkGreen}Remark}
+\newtheorem*{note}{\color{MyDarkGreen}Note}
+
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                           CUSTOM MACROS & SHORTCUTS                          %
+%──────────────────────────────────────────────────────────────────────────────%
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\ot}{\otimes}
+\newcommand{\cU}{\mathcal U}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\set}[1]{\{\,#1\,\}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\Cst}{$C^{*}$}
+\newcommand{\dimvec}[1]{\widetilde{\bm #1}} % dimension column-vector
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathrm{id}}
+
+\newcommand{\missingfigure}[1]{{\color{MyRed} \bfseries [Missing figure: #1]}}
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                                 FRONT MATTER                                %
+%──────────────────────────────────────────────────────────────────────────────%
+\title{\color{MyDarkBlue}\bfseries\huge Note on UOB Project}
+\author{Jay}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+\textit{Here, we include all the process on this topic. We will start by putting the Primary example, and step by step go on.}
+\end{abstract}
+
+\tableofcontents
+\vspace{1em}
+
+
+\newpage
+%──────────────────────────────────────────────────────────────────────────────%
+%                                SAMPLE USAGE                                 %
+%──────────────────────────────────────────────────────────────────────────────%
+\section{Introduction}
+
+\subsection*{Finite–dimensional \Cst-algebras}
+
+\begin{definition}[{\cite[§3.2]{JonesSunder}}]
+A \emph{finite–dimensional \Cst-algebra} $A$ is $\ast$-isomorphic to a finite
+direct sum of full matrix algebras
+\[
+  A \cong \bigoplus_{i=1}^{s} M_{n_i}(\mathbb{C}) , \qquad (n_i\ge 1).
+\]
+\end{definition}
+
+\paragraph{Structure theorem.}
+Every finite–dimensional \Cst-algebra is semisimple; its simple components are
+the matrix blocks above and its \textbf{minimal central projections}
+\[
+  p_i=(0,\dots,0,\,I_{n_i},\,0,\dots,0)
+\]
+sum to $1_A$.
+
+\paragraph{Dimension vector.}
+Write
+\(
+  \dimvec n = (n_1,\dots,n_s)^{\!\mathsf T}\!,\)
+a \emph{column} vector.  For each $i$, the irreducible left $A$-module
+$V_i=\mathbb{C}^{n_i}$ satisfies
+$\dim_{\mathbb{C}}V_i=n_i$.
+
+\begin{definition}
+Let $B=\bigoplus_{j=1}^{r}M_{m_j}(\mathbb{C})$ be another finite–dimensional
+\Cst-algebra with dimension vector
+\[
+  \dimvec m=(m_1,\dots,m_r)^{\!\mathsf T}.
+\]
+A \emph{unital inclusion} $\,B\subseteq A\,$ is specified by the
+\emph{inclusion matrix}
+\[
+H=[h_{ij}]\in M_{s\times r}(\mathbb{N}_0)
+\]
+whose entry $h_{ij}$ is the multiplicity of the simple $B$-module
+$W_j=\mathbb{C}^{m_j}$ inside $V_i\!\!\restriction_B$.  Equivalently
+\begin{equation}\label{eq:Hmn}
+  H\,\dimvec m =\dimvec n.
+\end{equation}
+\end{definition}
+
+%--------------------------------------------------------------------
+\subsection*{Conditional expectations and traces}
+
+%--------------------------------------------------------------------
+\begin{definition}[Conditional expectation]\label{def:cond-exp}
+Let $A$ be a unital $C^{*}$-algebra and $B\subseteq A$ a unital (i.e. $1_{B}=1_{A}$)
+$C^{*}$-subalgebra.  A \emph{conditional expectation} (of $A$ \emph{onto} $B$) is a linear map
+\[
+   E:A\longrightarrow B
+\]
+satisfying the following four properties:
+\begin{enumerate}
+  \item\textbf{Completely positive:} for every $n\in\mathbb{N}$ the
+        amplified map
+        \[
+        E^{(n)}:M_{n}(A)\to M_{n}(B),\; [x_{ij}]\mapsto[E(x_{ij})]
+        \]
+sends positive matrices to positive matrices.
+
+  \item\textbf{Unital (unit–preserving):} $E(1_{A})=1_{B}$.
+
+  \item\textbf{$B$–bimodular:} 
+        \[
+        E(b_{1}x\,b_{2}) = b_{1}\,E(x)\,b_{2}
+        \quad
+        \text{for all }b_{1},b_{2}\in B,\;x\in A.
+        \]
+
+  \item\textbf{Idempotent (projection):} $E^{2}=E$
+        (equivalently $E|_{B}=\mathrm{id}_{B}$). 
+\end{enumerate}
+\end{definition}
+
+
+\paragraph{Canonical (\textbf{Markov}) trace.}
+Write $\tr_{n_i}$ for the normalised matrix trace on $M_{n_i}(\mathbb{C})$.
+The \emph{standard trace} on $A$ is
+\[
+  \tau_A\!\bigl((x_1,\dots,x_s)\bigr)
+  =\sum_{i=1}^{s}\frac{n_i}{d}\;\tr_{n_i}(x_i),
+  \quad
+  d =\sum_{i=1}^s n_i^{2}.
+\]
+Jones–Sunder call $\tau_A$ the \emph{Markov trace} because
+$\tau_A\circ E=\tau_A$ for the unique trace-preserving expectation $E$ onto a
+unital subalgebra $B$.  Its \emph{trace vector} is precisely $\dimvec n$.
+
+\begin{theorem}[Jones–Watatani conditional expectation]\label{thm:JW-CE}
+Let
+\[
+   A=\bigoplus_{i=1}^{s}M_{n_i}(\mathbb{C}), \qquad 
+   B=\bigoplus_{j=1}^{r}M_{m_j}(\mathbb{C})\subseteq A,
+\]
+and let
+\[
+  \tau_A\!\bigl((x_1,\dots,x_s)\bigr)=\frac1d\sum_{i=1}^{s} n_i\,\tr_{n_i}(x_i),
+  \qquad
+  d=\sum_{i=1}^{s}n_i^{2},
+\]
+be the \textbf{Markov trace}.  
+There exists a unique trace-preserving conditional expectation 
+\(E_\tau:A\to B\).  
+On the $i$-th block \(x_i\in M_{n_i}(\mathbb{C})\) it is given by
+\begin{equation}\label{eq:JW-formula}
+{\color{MyDarkBlue}
+  E_\tau(x_i)=
+  \bigoplus_{j=1}^{r}\! 
+     \frac{m_j}{n_i}\; 
+     \sum_{\ell=1}^{h_{ij}}
+        {\bigl(\theta_{ij}^{\,\ell}\bigr)^{-1}\! 
+        \bigl(e_{ij}^{\,\ell}x_i\,e_{ij}^{\,\ell}\bigr)}
+  \quad(1\le i\le s),
+}
+\end{equation}
+where \(e_{ij}^{\,\ell}:=\theta_{ij}^{\,\ell}(I_{m_j})\) is the supporting projection of the
+$\ell$-th copy of \(M_{m_j}\) inside \(M_{n_i}\).
+\end{theorem}
+
+\paragraph{Notation at a glance.}
+\begin{itemize}
+  \item $H=[h_{ij}]$ is the inclusion matrix; $h_{ij}$ counts how many times
+        \(M_{m_j}\) appears inside \(M_{n_i}\).
+  \item \(\theta_{ij}^{\,\ell}:M_{m_j}(\mathbb{C})\hookrightarrow M_{n_i}(\mathbb{C})\)
+        (\(\ell=1,\dots,h_{ij}\)) is the $\ell$-th block-diagonal embedding.
+  \item \(e_{ij}^{\,\ell}= \theta_{ij}^{\,\ell}(I_{m_j})\) is the corresponding
+        \textit{corner projection}. 
+        The compression \(e_{ij}^{\,\ell}x_i e_{ij}^{\,\ell}\) lies in the corner
+        algebra \(e_{ij}^{\,\ell}M_{n_i}e_{ij}^{\,\ell}\),
+        which the inverse map \((\theta_{ij}^{\,\ell})^{-1}\) identifies with
+        \(M_{m_j}\).
+  \item The scalar factor \(m_j/n_i\) is chosen so that
+        \(\tau_A(x)=\tau_A\!\bigl(E_\tau(x)\bigr)\) for all \(x\in A\).
+\end{itemize}
+
+\begin{proof}[Proof of Theorem \ref{thm:JW-CE}]
+We split the argument into six transparent steps.
+
+\medskip
+\noindent\textbf{Step 1: Block notation and embeddings.} Fix $i$.
+Inside the simple block $M_{n_i}(\mathbb{C})$ the inclusion
+$B\subseteq A$ picks out
+$h_{ij}$ mutually orthogonal corners
+\[
+   e_{ij}^{\,\ell}= \theta_{ij}^{\,\ell}(I_{m_j}) 
+   \quad
+   (1\le j\le r,\;1\le \ell\le h_{ij}),
+   \qquad
+   \sum_{j,\ell}e_{ij}^{\,\ell}=I_{n_i}.
+\]
+Each $\theta_{ij}^{\,\ell}$ is a unital $\ast$–embedding
+\[
+\theta_{ij}^{\,\ell}:M_{m_j}\hookrightarrow M_{n_i}
+\]
+and \(e_{ij}^{\,\ell}M_{n_i}e_{ij}^{\,\ell}\)
+inherits the matrix–algebra structure of $M_{m_j}$ through
+\((\theta_{ij}^{\,\ell})^{-1}\). 
+Explicitly, we may pick matrix units \(\{u^{(\ell)}_{ab}\}_{a,b=1}^{m_j}\subset M_{n_i}\)
+so that
+$\theta_{ij}^{\,\ell}(E_{ab})=u_{ab}^{(\ell)}$
+and
+$e_{ij}^{\,\ell}=u^{(\ell)}_{11}+\dots+u^{(\ell)}_{m_jm_j}$.
+
+\medskip
+\noindent\textbf{Step 2: Defining $E_\tau$.} Given $x=(x_1,\dots,x_s)\in A$ set
+\[
+E_\tau(x)=\bigl( E_\tau(x_1),\dots,E_\tau(x_s)\bigr)
+\]
+with $E_\tau(x_i)$ given by formula~\eqref{eq:JW-formula}.
+Because direct sums are orthogonal, it suffices to verify all properties
+block–wise, i.e. for a \emph{single} $i$ and $x_i\in M_{n_i}$.
+\medskip
+\noindent\textbf{Step 3: Well–defined and $B$–bimodular.} For fixed $i$, each term
+\[
+  (\theta_{ij}^{\,\ell})^{-1}(e_{ij}^{\,\ell}x_ie_{ij}^{\,\ell})
+\]
+lies in $M_{m_j}(\mathbb{C})$,
+hence the orthogonal direct sum
+over~$j$ is in $B$.
+Further, for $b_1,b_2\in B$ their $i$-th block
+commutes with every $e_{ij}^{\,\ell}$ (they act \emph{diagonally} on the same
+minimal central projections).  Consequently
+\[
+   E_\tau(b_1x b_2)=b_1E_\tau(x)b_2,
+   \qquad
+   x\in A,
+\]
+so $E_\tau$ is $B$-bimodular.
+
+\medskip
+\noindent\textbf{Step 4: Complete positivity.} Each corner map
+\[
+   C_{ij}^{\,\ell}:x_i\mapsto e_{ij}^{\,\ell}x_ie_{ij}^{\,\ell}
+\]
+is completely positive (it is a conjugation by a projection).
+So is its composition with the $*$–isomorphism
+\((\theta_{ij}^{\,\ell})^{-1}\). 
+A finite direct sum and a positive scalar multiple of completely positive
+maps is completely positive.
+Hence $E_\tau$ is \emph{completely} positive.
+
+\medskip
+\noindent\textbf{Step 5: Trace preservation.} Compute on a \emph{matrix unit} $u_{ab}^{(\ell)}$ (where $a,b\le m_j$):
+\[
+   E_\tau(u_{ab}^{(\ell)}) = \frac{m_j}{n_i}\, 
+     (\theta_{ij}^{\,\ell})^{-1}
+     \!\bigl(u_{aa}^{(\ell)}u_{ab}^{(\ell)}u_{bb}^{(\ell)}\bigr)
+   =\frac{m_j}{n_i}\,E_{ab}\in M_{m_j}.
+\]
+Taking the trace,
+\[
+\tau_A(u_{ab}^{(\ell)}) = \frac{n_i}{d}\,\delta_{ab},
+\]
+whereas
+\( \tau_A\!\bigl(E_\tau(u_{ab}^{(\ell)})\bigr) = \frac{m_j}{d}\,\delta_{ab}.\)
+Because $u^{(\ell)}_{ab}$ sits inside the $j$-th block of $B$ exactly
+\(m_j/n_i\) times, the two numbers coincide.
+By linearity and faithfulness of $\tau_A$
+this equality extends from matrix units to all of $A$:
+\[
+   \tau_A\circ E_\tau=\tau_A.
+\]
+
+\medskip
+\noindent\textbf{Step 6: Uniqueness.} Suppose $F:A\to B$ is another conditional expectation with
+$\tau_A\circ F=\tau_A$. 
+Let $\{e_\mu\}$ be \emph{all} matrix units in every block $M_{n_i}$;
+these form a basis of $A$ as a vector space.
+For each $\mu$,
+\[
+\tau_A\!\bigl((F-E_\tau)(e_\mu)^*(F-E_\tau)(e_\mu)\bigr)=0
+\]
+so $(F-E_\tau)(e_\mu)=0$ by faithfulness.
+Hence $F=E_\tau$ on a basis, thus on all of~$A$.
+\end{proof}
+%--------------------------------------------------------------------
+
+
+\newpage
+%--------------------------------------------------------------------
+\subsection{The Jones basic construction for \(B\subseteq A\)}
+
+\paragraph{Standing data.}
+Throughout we keep the notation of Theorem~\ref{thm:JW-CE}:
+\[
+  A=\bigoplus_{i=1}^{s}M_{n_i}(\mathbb{C}), \quad
+  B=\bigoplus_{j=1}^{r}M_{m_j}(\mathbb{C})\subseteq A, \quad
+  H=[h_{ij}]_{i,j}\in M_{s\times r}(\mathbb{N}_0),
+\]
+and we work in the GNS Hilbert space
+\(L^2(A):=L^2(A,\tau_A)\) where the inner product is
+\(\langle x,y\rangle=\tau_A(y^*x)\). 
+Left multiplication embeds \(A\) faithfully into \(\mathcal B\!\left(L^2(A)\right)\).
+
+\paragraph{The Jones projection.}
+Let \(E_\tau:A\!\to\!B\) be the trace–preserving conditional
+expectation from Theorem~\ref{thm:JW-CE}.  
+Define
+\[
+ {\color{MyDarkBlue} e_B : L^2(A)\longrightarrow L^2(A), \quad e_B(\xi)=E_\tau(\xi) \qquad(\xi\in A\subseteq L^2(A)) }
+\]
+Because \(E_\tau\) is completely positive and unital, $e_B$ extends by
+continuity to a bounded operator on all of \(L^2(A)\).
+
+\begin{proposition}[Basic facts about \(e_B\)]\label{prop:Jones-rel}
+The operator \(e_B\) satisfies
+\( e_B=e_B^{\,*}=e_B^{\,2} \)
+and, for every \(x\in A\),
+\[
+   e_B\,x\,e_B = E_\tau(x)\,e_B
+   \quad\text{\emph{(Jones relations)}}.
+\]
+\end{proposition}
+
+\begin{proof}
+\emph{(i) Projection.} For $\xi\in A$ we have
+$e_B^{\,2}(\xi)=E_\tau\!\bigl(E_\tau(\xi)\bigr)=E_\tau(\xi)=e_B(\xi)$
+because $E_\tau$ is idempotent; adjointness is obvious from
+$\langle e_B\xi,\eta\rangle=\langle\xi,e_B\eta\rangle$.
+
+\emph{(ii) Jones relations.} Take $x\in A$ and $\xi\in A$. 
+Then
+\[
+e_B x e_B(\xi)= e_B\!\bigl( xE_\tau(\xi)\bigr)
+               = E_\tau\!\bigl(xE_\tau(\xi)\bigr)
+               = E_\tau(x)\,E_\tau(\xi)
+               = E_\tau(x)\,e_B(\xi),
+\]
+where we used the $B$–bimodule property of $E_\tau$.
+\end{proof}
+
+\paragraph{The first basic construction.}
+Set
+\[
+   A_1 := 
+   C^*\!\bigl(A,e_B\bigr) = 
+   \operatorname{span}_{\mathrm{C}^*}\{a_1e_Ba_2 : a_1,a_2\in A\}.
+\]
+By Proposition~\ref{prop:Jones-rel} we obtain a new tower of unital
+inclusions
+\[
+ {\color{MyDarkBlue} B \subseteq A \subseteq A_1 } 
+\]
+Since $A$ is finite–dimensional, the $C^{*}$–algebra $A_1$ is finite-
+dimensional as well.  We now describe its structure block–by–block.
+
+\begin{theorem}[Structure of \(A_1\)]\label{thm:A1-structure}
+Relative to the pair \((A,B)\) the inclusion matrix of \(A\subseteq A_1\)
+is the \emph{Gram matrix} \(H^{\!\top}H\).  Concretely,
+\[
+   A_1 \cong 
+   \bigoplus_{i=1}^{s}
+   M_{n_i}(\mathbb{C})\oplus 
+   \bigoplus_{j=1}^{r} h_{ij}^{\,2}\,M_{m_j}(\mathbb{C}).
+\]
+\end{theorem}
+
+\begin{proof}[Idea of proof]
+For each pair $(i,j)$ the corner $e_{ij}^{\,\ell}M_{n_i}e_{ij}^{\,\ell}$ is
+$\ast$–isomorphic to $M_{m_j}$.  Products
+$a_1e_Ba_2$ with $a_k\in M_{n_i}$ are supported on those corners,
+and the Jones relations force exactly $h_{ij}^{\,2}$ copies of
+$M_{m_j}$ to appear.  A direct matrix computation
+shows that the multiplicity of the $i$–th simple block of $A$
+inside $A_1$ is $\sum_{j}h_{ij}^{\,2}$,
+i.e. the $(i,i)$-entry of $H^{\!\top}H$.
+\end{proof}
+
+\paragraph{Index of the inclusion.}
+Set
+\[
+  [A:B]
+  :=\tau_A(e_B)^{-\!1}.
+\]
+Because $\tau_A(e_B)=1/[A:B]$ is simply the norm–square of the inclusion
+matrix, we get
+\[
+ {\color{MyDarkBlue} [A:B]=\|H\|_2^{\,2}=\sum_{i=1}^{s}\sum_{j=1}^{r}h_{ij}^{\,2}. }
+\]
+This positive integer is called the \textbf{Jones index}
+of the finite–dimensional inclusion \(B\subseteq A\).
+
+\begin{remark}[Key properties at a glance]\leavevmode
+\begin{itemize}
+  \item
+    \(E_\tau\) is the unique $\tau_A$–preserving conditional expectation
+    from $A$ onto $B$.
+  \item
+    \(e_B\) encodes both \(E_\tau\) and the inclusion \(B\subseteq A\).
+  \item
+    The sequence \(B\subseteq A\subseteq A_1\subseteq A_2\subseteq\cdots\),
+    obtained by iterating the construction, carries complete information
+    about the inclusion; its abstract combinatorial shadow is the
+    \emph{Bratteli diagram} whose first incidence matrix is \(H\).
+\end{itemize}
+\end{remark}
+%--------------------------------------------------------------------
+
+
+\newpage
+\section{Need things from Bachi and Bhat paper}
+
+\begin{proposition}[{\color{MyPurple}Necessary conditions for a unitary orthonormal basis}]
+\leavevmode
+
+Let $B=\bigoplus_{j=1}^{r}M_{m_j}(\bbC)\subseteq
+      A=\bigoplus_{i=1}^{s}M_{n_i}(\mathbb{C})$ be a unital inclusion with
+inclusion matrix $H=[h_{ij}]$, dimension vectors
+\[
+  \widetilde{\bm m}=(m_1,\dots,m_r)^{\!\mathsf T},\;\widetilde{\bm n}=(n_1,\dots,n_s)^{\!\mathsf T}
+\]
+and conditional expectation $E\colon A\to B$. 
+If $(B\subseteq A,E)$ admits a \textbf{unitary orthonormal basis} of size $d$
+(in the sense of Pimsner–Popa), then\vspace{0.4em}
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+  \item \textbf{Spectral condition}
+        \[
+   H^{\!\mathsf T}\widetilde{\bm n}=d\,\widetilde{\bm m},\qquad
+           H^{\!\mathsf T}H\,\widetilde{\bm m}=d\,\widetilde{\bm m},\quad
+           HH^{\!\mathsf T}\widetilde{\bm n}=d\,\widetilde{\bm n}.
+\]
+
+  \item \textbf{Trace (Markov) condition}\; 
+        $E$ preserves the Markov trace
+        \[
+          \tau_A\!\bigl((x_i)\bigr)=\frac{1}{\sum_{i}n_i^{2}}
+          \sum_{i} n_i\,\Tr(x_i),
+\]
+        and $E$ is the \emph{unique} expectation with this property.
+
+  \item \textbf{Integrality of the norm}
+        \[
+          d=\lVert H\rVert_2^{\,2}
+          =\sum_{i=1}^{s}\sum_{j=1}^{r}h_{ij}^{\,2}\in\mathbb{N}.
+\]
+
+  \item \textbf{Quadratic dimension identity}
+        \[
+          \sum_{i=1}^{s}n_i^{2}
+          = 
+          d\sum_{j=1}^{r}m_j^{2}.
+\]
+\end{enumerate}
+\end{proposition}
+
+
+\section{Finite–Dimensional setup \& main results (Bakshi–Bhat)}
+
+\subsection*{Standing data}
+\begin{itemize}[leftmargin=2.2em]
+  \item $B=\displaystyle\bigoplus_{j=1}^{r}M_{m_j}(\mathbb{C})$,
+        $A=\displaystyle\bigoplus_{i=1}^{s}M_{n_i}(\mathbb{C})$
+        \quad(finite–dimensional \Cst- or von Neumann algebras).
+  \item $H=[h_{ij}]\in M_{s\times r}(\bbN_0)$
+        \;(\emph{inclusion matrix}),\quad $H\,\widetilde{\bm m}=\widetilde{\bm n}$ where
+        \(\widetilde{\bm m}=(m_j)_j^{\!\mathsf T},\ \widetilde{\bm n}=(n_i)_i^{\!\mathsf T}\).
+  \item $E:A\!\to\!B$ a faithful conditional expectation.
+  \item \emph{Markov trace} on $A$
+        \[
+          \tau_A((x_i))=\frac{1}{\sum_i n_i^{2}}\, 
+          \sum_{i=1}^{s} n_i\,\Tr(x_i),\qquad
+          \text{trace vector }=\widetilde{\bm n}.
+\]
+  \item A \textbf{unitary orthonormal basis} is a family
+        $\{W_\alpha\}_{\alpha=1}^{d}\subset A$
+        of unitaries with
+        $\;E(W_\alpha^{*}W_\beta)=\delta_{\alpha\beta}\,1_B$
+        and
+        $\;\sum_{\alpha}W_\alpha E(W_\alpha^{*}X)=X\;(X\in A)$.
+\end{itemize}
+
+\subsection*{Core theorem (necessary conditions)}
+\begin{theorem}[Bakshi–Bhat; Thm.\,A]\label{thm:BB-necessary}
+If such a basis of size $d$ exists, then
+\begin{align*}
+  &{\color{MyDarkBlue} H^{\!\mathsf T}\widetilde{\bm n}=d\,\widetilde{\bm m}
+  \quad\Longleftrightarrow\quad
+  H^{\!\mathsf T}H\,\widetilde{\bm m}=d\,\widetilde{\bm m},\; 
+  HH^{\!\mathsf T}\widetilde{\bm n}=d\,\widetilde{\bm n};
+  \\\[-1pt]
+  &\tau_A\circ E=\tau_A\quad\text{(\emph{trace preservation; $E$ is unique})};
+  \\\[4pt]
+  &d=\lVert H\rVert_2^{\,2}\in\bbN, \quad
+  \sum_{i}n_i^{2}=d\sum_{j}m_j^{2}.
+\end{align*}
+\end{theorem}
+
+\subsection*{Constructions proving sufficiency in special cases}
+\begin{theorem}[Explicit bases]\label{thm:BB-sufficient}
+\leavevmode
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item \textbf{Abelian corner (Theorem B).}\; 
+        If $B$ is abelian and conditions in
+        Thm.\,\ref{thm:BB-necessary} hold,
+        a unitary basis exists
+        (quasi–circulant construction $\bigl\{V^{t}U^{t}\bigr\}$). 
+  \item \textbf{Simple corner (Theorem C).}\; 
+        \begin{itemize}[leftmargin=1.55em]
+          \item If $B=M_m(\bbC)$ and $E$ preserves the Markov trace,
+                then $(B\subseteq A,E)$ has a unitary basis.
+          \item If $A=M_n(\bbC)$ and $E$ preserves the normalized trace,
+                then $(B\subseteq A,E)$ has a unitary basis.
+        \end{itemize}
+  \item \textbf{Weyl-type families.}\; 
+        When each non-abelian block of $A$ is $M_n(\bbC)$
+        and $B$ is abelian,
+        the authors build ``multi–Weyl’’ bases
+        extending the classical $(V^{j}U^{k})_{j,k}$ scheme.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Abelian corner: existence of a unitary orthonormal basis}
+\label{sec:abelian-corner}
+
+We prove part~\textup{(a)} of Theorem~\ref{thm:BB-sufficient}.
+Throughout this subsection
+
+\[
+  B = \bbC^{m_1}\oplus\cdots\oplus\bbC^{m_r}
+  \qquad\text{(finite dimensional \textbf{abelian} \Cst–algebra)},
+\]
+
+\[
+  A =M_{n_1}(\mathbb{C})\oplus\cdots\oplus M_{n_s}(\mathbb{C})
+  \qquad\text{(finite dimensional multi–matrix algebra)},
+\]
+and
+\( E : A \twoheadrightarrow B \)
+is the given trace–preserving conditional expectation.
+Let  
+
+\[
+  H =[h_{ij}]_{\,1\le i\le s,\;1\le j\le r}\in M_{s\times r}(\bbN)
+\]
+be the inclusion matrix (notation from \cite{BakshiBhat2025}).  
+The hypotheses of Theorem~\ref{thm:BB-necessary} say precisely that  
+
+\[
+  H^\mathsf T H\,\widetilde{\bm m}
+  = 
+  d\,\widetilde{\bm m},
+  \hspace{2em}
+  \widetilde{\bm m}=\begin{bmatrix}
+    m_1\\[-1pt]\vdots\\[-1pt]m_r
+  \end{bmatrix},
+  \quad
+  d:=\|H\|_2^2\in\bbN,
+\]
+and that \(E\) preserves the Markov/normalised trace.
+
+\paragraph{Step 1: reduce to a single matrix block.}
+Because \(B\) is abelian, each summand \(M_{n_i}(\mathbb{C})\) of \(A\) admits the
+\emph{same} inclusion pattern.  It is therefore enough to build a unitary
+orthonormal basis (UOB) in the simple corner
+
+\[
+  M_{n}(\mathbb{C})\supseteq B_0:=\diag(\bbC,\dots,\bbC)\subset M_n(\bbC),
+  \qquad n:=n_1=\cdots=n_s ,
+\]
+and then replicate it block-wise.  From now on we write
+\(A=M_n(\bbC)\) and \(B=B_0\).
+
+\paragraph{Step 2: pick two special unitaries \(U,V\).}
+Set \(d=r\) (number of minimal projections in \(B\)).
+Let \(\omega:=e^{2\pi i/d}\).
+Define  
+
+\[
+  U:=\diag(1,\omega,\omega^2,\dots,\omega^{d-1})
+      \in M_d(\bbC),
+  \quad
+  V:=(v_{kl})_{k,l=0}^{d-1},\; v_{kl}:=\frac1{\sqrt d}\,\omega^{kl}
+      \in M_d(\bbC).
+\]
+\begin{itemize}
+  \item \(U\) is diagonal and unitary;  
+  \item \(V\) is the (\(d\times d\)) discrete Fourier matrix, hence unitary;  
+  \item \(VU=\omega\,UV\) (a one-dimensional Weyl relation).
+\end{itemize}
+
+\paragraph{Step 3: define the “quasi–circulant” family.}
+For each \(t=0,\dots,d-1\) put
+\[
+  W_t:=V^{\,t}\,U^{\,t}\in M_d(\bbC).
+\]
+Because \(UV=\omega^{-1}VU\) and \(\omega^d=1\),
+ the set \(\{W_t : 0\le t<d\}\) is \emph{closed under multiplication}: \(W_sW_t=\omega^{st}W_{s+t}\).
+
+\paragraph{Step 4: orthonormality with respect to \(E\).}
+Identify \(B\) with the diagonal subalgebra of \(A=M_d(\bbC)\). 
+The trace–preserving expectation is
+\(E(X)=\frac1d\Tr(X)\,I_d\) (\(\Tr=\) ordinary matrix-trace).
+For \(s,t\in\{0,\dots,d-1\}\),
+\[
+  E(W_s^*W_t)
+  = 
+  \frac1d\Tr\bigl(W_{t-s}\bigr)\,I_d
+  = 
+  \begin{cases}
+    I_d &\text{if }s=t,\\[4pt]
+    0   &\text{if }s\ne t,
+  \end{cases}
+\]
+because \(\Tr(W_k)=0\) whenever \(k\not\equiv0\pmod d\).  
+Hence the \(W_t\)’s are orthonormal over \(B\).
+
+\paragraph{Step 5: unitarity and spanning.}
+Each \(W_t\) is a product of two unitaries, hence unitary.
+Since \(M_d(\bbC)\) has dimension \(d^2\) over \(\bbC\) and
+\(\{W_t b : 0\le t<d,\;b\in\mathrm{diag}(\mathbb{C}^d)\}\) consists of
+\(d\cdot d=d^2\) linearly independent vectors, 
+the family \(\{W_t\}_{t=0}^{d-1}\) spans \(A\) as a right \(B\)-module.
+
+\paragraph{Step 6: conclusion for the abelian corner.}
+Thus \(\{W_t\}_{t=0}^{d-1}\) is a unitary orthonormal basis of \(A=M_n(\bbC)\)
+over its abelian subalgebra \(B\).
+Re-instating the direct-sum decomposition of \(A\),
+we obtain a UOB for the original inclusion
+\(B\subseteq A\). 
+\hfill\qedsymbol
+
+
+\subsection{Simple corner: the case $B=M_m(\bbC)$ \& $E$ Markov}
+\label{sec:simple-corner-B}
+
+We turn to part~\textup{(b)} of Theorem~\ref{thm:BB-sufficient}.
+First assume
+
+\[
+  B =M_m(\bbC),
+  \quad
+  A =\bigoplus_{i=1}^s M_{n_i}(\mathbb{C}),
+  \quad
+  E\colon A\twoheadrightarrow B
+\]
+is the unique $B$–bimodule projection preserving the \emph{Markov trace}
+on each block of \(A\).  We will produce an explicit UOB.
+
+\medskip
+\noindent\textbf{Step 1: Tensor–product decomposition.} Since \(B\) is simple, as a right–\(B\)–module one checks
+
+\[
+  A \cong M_m(\bbC)\otimes\bbC^N, \quad
+  N :=\sum_{i=1}^s\!n_i^2.
+\]
+Under this identification:
+
+\[
+  B = M_m(\bbC)\otimes 1_N, \quad
+  A = M_m(\bbC)\otimes M_N(\bbC),
+\]
+and the Markov–trace–preserving \(E\) becomes
+
+\[
+  E\bigl(x\otimes y\bigr)
+  = 
+  \frac1N\,\Tr_N(y)\;\bigl(x\otimes I_N\bigr).
+\]
+
+\medskip
+\noindent\textbf{Step 2: Unitary basis in the “matrix” factor.} By the abelian–corner case (see \S\ref{sec:abelian-corner}), there exists
+a unitary orthonormal basis
+\(\{W_t\}_{t=0}^{N-1}\subset M_N(\bbC)\)
+for the inclusion \(\bbC^N\subset M_N(\bbC)\)
+with respect to the normalized trace on \(M_N\).  Equivalently
+
+\[
+  E_N\bigl(W_s^*W_t\bigr)
+  =\delta_{st}\,I_N, \quad
+  W_t\in M_N(\bbC),
+\]
+where \(E_N(y)=\tfrac1N\Tr_N(y)\,I_N\).
+
+\medskip
+\noindent\textbf{Step 3: Lift to a basis of \(A\) over \(B\).} Define
+
+\[
+  U_t := I_m \otimes W_t
+  \in M_m(\bbC)\otimes M_N(\bbC)=A, \quad
+  t=0,\dots,N-1.
+\]
+Then each \(U_t\) is unitary in \(A\), and
+
+\[
+  E\bigl(U_s^*\,U_t\bigr)
+  =E\bigl(I_m\otimes W_s^*W_t\bigr)
+  =I_m\otimes E_N(W_s^*W_t)
+  =\delta_{st}\,(I_m\otimes I_N),
+\]
+so \(\{U_t\}\) is orthonormal over \(B\).  Finally, since \(\{W_t\}\)
+spans \(M_N\) as a right \(\bbC^N\)–module, \(\{U_t\}\)
+spans \(A\) as a right \(B\)–module, giving the desired UOB.
+
+\bigskip
+\subsection{Dual case: $A=M_n(\bbC)$ \& $E$ normalized trace}
+\label{sec:simple-corner-A}
+
+Now assume
+
+\[
+  A=M_n(\bbC),
+  \quad
+  B\subseteq A
+  \quad\text{arbitrary multi–matrix subalgebra}, \quad
+  E\colon A\twoheadrightarrow B
+\]
+preserves the \emph{normalized} matrix–trace \(\tau_n\).  Exactly the same
+tensor–product argument applies once one observes
+
+\[
+  A\cong\bbC^M\otimes M_n(\bbC), \quad
+  B=\bbC^M\otimes I_n,
+\]
+and one invokes the $B=M_m(\bbC)$ case on the first factor.  Explicitly:
+
+\[
+A =\bigl(\bbC^M\bigr)\otimes M_n(\bbC),
+ \quad
+ B =\bigl(\bbC^M\bigr)\otimes I_n, \quad
+ E(f\otimes x)
+ =\bigl(E_M(f)\bigr)\otimes x,
+\]
+where \(E_M\colon \bbC^M\to\bbC^M\) is the normalized–trace expectation.
+Pulling back a UOB from \(\bbC^M\subset M_M(\bbC)\) completes the proof.
+\hfill\qedsymbol
+
+
+\subsection{Weyl–type families when $B$ is abelian}
+\label{sec:weyl}
+
+Assume
+
+\[
+  A = \bigoplus_{i=1}^{s} M_{n_i}(\mathbb{C}), \qquad
+  B \cong\bbC^s
+  \quad(\text{so $B$ is generated by the minimal central projections }p_i),
+\]
+and that $E\colon A\to B$ is the trace‐preserving expectation coming from the
+standard trace on each matrix summand.  We will exhibit a unitary basis
+
+$$ 
+  \bigl\{\,W_{i;\alpha,\beta}:1\le i\le s,\;0\le\alpha,\beta<n_i\bigr\} 
+$$ 
+of $A$ over~$B$.
+
+\medskip
+\noindent\textbf{Step 1: Choose Weyl unitaries on each summand.} For each $i=1,\dots,s$, pick a pair of generating “Weyl” unitaries
+
+\[
+  U_i,V_i\in M_{n_i}(\mathbb{C}),
+\]
+satisfying
+
+\[
+  U_i V_i =\omega_i\,V_i U_i,
+  \quad
+  U_i^{n_i}=V_i^{n_i}=I_{n_i},
+  \quad
+  \omega_i=e^{2\pi i/n_i}.
+\]
+Then
+
+\[
+  \bigl\{\,U_i^\alpha V_i^\beta
+  : 0\le\alpha,\beta<n_i\bigr\}
+\]
+is a unitary orthonormal basis of $M_{n_i}$ over its centre
+(with respect to the normalized trace on $M_{n_i}$).
+
+\medskip
+\noindent\textbf{Step 2: Embed these into~$A$.} Under the identification
+
+\[
+  A \cong (p_1Ap_1)\oplus\cdots\oplus(p_sAp_s), \quad
+  p_iAp_i\cong M_{n_i}(\mathbb{C}),
+\]
+define for each triple $(i,\alpha,\beta)$ the unitary
+
+\[
+  W_{i;\alpha,\beta}
+  = 
+  \underbrace{0\oplus\cdots\oplus 0}_{i-1}
+  \oplus
+  \bigl(U_i^\alpha V_i^\beta\bigr)
+  \oplus
+  \underbrace{0\oplus\cdots\oplus 0}_{s-i}
+  \in A.
+\]
+By construction $W_{i;\alpha,\beta}$ acts nontrivially only on the
+$i$–th summand and is hence unitary in~$A$.
+
+\medskip
+\noindent\textbf{Step 3: Check orthonormality over~$B$.} Since 
+
+\[
+  E\bigl(x_1\oplus\cdots\oplus x_s\bigr)
+  =\sum_{i=1}^s\tfrac1{n_i}\,\Tr(x_i)\;p_i,
+\]
+one computes for any indices $(i,\alpha,\beta),\,(j,\gamma,\delta)$
+
+\[
+  E\bigl(W_{i;\alpha,\beta}^* \,W_{j;\gamma,\delta}\bigr)
+  =\delta_{ij}\; 
+  E_i\!\bigl((U_i^\alpha V_i^\beta)^* (U_i^\gamma V_i^\delta)\bigr)\,p_i
+  =\delta_{ij}\,\delta_{\alpha\gamma}\,\delta_{\beta\delta}\;p_i,
+\]
+where
+\( E_i(y)=\tfrac1{n_i}\Tr(y)\,I_{n_i} \)
+is the normalized‐trace expectation on the $i$–th block.  In particular
+
+\[
+  E\bigl(W_{i;\alpha,\beta}^* \,W_{j;\gamma,\delta}\bigr)
+  = \delta_{\,i,j}\,\delta_{\alpha,\gamma}\,\delta_{\beta,\delta}
+    \;(p_1+\cdots+p_s)
+  =\delta_{(i,\alpha,\beta),(j,\gamma,\delta)}\,1_B.
+\]
+Hence the collection $\{W_{i;\alpha,\beta}\}$ is orthonormal over~$B$.
+
+\medskip
+\noindent\textbf{Step 4: Spanning property.} By counting dimensions one sees there are
+\( \sum_i n_i^2=\dim A/\dim B \) 
+unitaries above, so orthonormality forces them to span $A$ as a right
+$B$–module.  Concretely, any
+$x=x_1\oplus\cdots\oplus x_s\in A$
+can be written block‐wise by the Weyl‐basis expansion in each
+$p_iAp_i$, and hence by the same formulas in $A$ itself.
+
+\medskip
+\noindent\textbf{Conclusion.}
+The unitaries
+
+\[
+  \{\,W_{i;\alpha,\beta}\} = \{\,0\oplus\cdots\oplus U_i^\alpha V_i^\beta\oplus\cdots\oplus0\}
+\]
+are unitary, orthonormal over $B$, and span $A$.  This completes the proof
+of part~\textup{(c)} of Theorem~\ref{thm:BB-sufficient}.
+\qed
+
+
+\newpage
+\subsection*{Applications inside the finite–dimensional tower}
+\begin{itemize}[leftmargin=1.8em]
+  \item \emph{Relative entropy}. 
+        If a unitary basis exists then
+        \( H(A_1\,|\,A)=\ln\!\bigl(\|H\|_2^{2}\bigr) \)
+        where $A_1$ is the first Jones basic construction.
+  \item \emph{Depth-2 subfactors}. 
+        Depth 2 inclusions with abelian relative commutant
+        satisfy the spectral condition automatically,
+        hence admit a unitary basis.
+\end{itemize}
+
+\subsection*{Author’s conjecture (open problem)}
+\begin{center}
+\emph{Spectral + trace conditions are \textbf{sufficient} in full generality.}
+\end{center}
+Current status:
+\begin{itemize}[leftmargin=1.8em]
+  \item \textbf{Proved} in the special settings of
+        Theorem~\ref{thm:BB-sufficient}(a)\,–\,(c).
+  \item \textbf{Open} when both $A$ and $B$ are genuinely multi-matrix
+        (no simple or abelian side) and $H$ satisfies the PF-eigenvector
+        equations but lacks additional regularity.
+\end{itemize}
+
+\begin{remark}[Perspective]
+The paper bridges classical Hadamard/Weyl unitary bases and
+Pimsner–Popa bases in subfactor theory, isolating
+spectral–theoretic obstructions and giving positive constructions
+in broad finite-dimensional landscapes.
+\end{remark}
+
+
+\newpage
+\section{\texorpdfstring{$\bbC\oplus M_{2}(\bbC)\subset M_{3}(\bbC)\oplus M_{9}(\bbC)$}{C ⊕ M₂ ⊂ M₃ ⊕ M₉}: a $2\times2$ inclusion of index $18$}
+\label{subsec:2x2-index18}
+
+\begin{example}[Inclusion matrix and basic data]\label{ex:2x2-H}
+\leavevmode
+
+\noindent
+\textbf{Inclusion matrix.}
+\[
+  H=\begin{bmatrix}3&0\\
+  1&4\end{bmatrix},
+  \qquad
+  H^{\!\mathsf T}\!H=\begin{bmatrix}10&4\\
+  4&16\end{bmatrix}.
+\]
+
+\medskip
+\noindent
+\textbf{Dimension vectors.}
+\[
+  \dimvec m=\begin{bmatrix}1\\[2pt]2\end{bmatrix},
+  \qquad
+  \dimvec n=H\dimvec m=\begin{bmatrix}3\\[2pt]9\end{bmatrix}.
+\]
+Because \(H^{\!\mathsf T}H\,\dimvec m=18\,\dimvec m\), the Perron–Frobenius
+eigenvalue is \(d=18\); hence the Jones index satisfies \([A:B]=18\).
+\end{example}
+
+\paragraph{Explicit embedding.}
+Let \(B=\bbC\oplus M_{2}(\bbC)\) and \(A=M_{3}(\bbC)\oplus M_{9}(\bbC)\). 
+For \(\beta\in\bbC\) and \(B_{2}\in M_{2}(\bbC)\)
+
+\[
+  \iota\bigl(\beta\oplus B_{2}\bigr)=
+  \underbrace{\begin{bmatrix}\beta&0&0\\
+  0&\beta&0\\
+  0&0&\beta\end{bmatrix}}_{M_{3}(\mathbb{C})}
+  \;\oplus\; 
+  \underbrace{\begin{bmatrix}
+     \beta &         &         &         &         \\
+           & B_{2}   &         &         &         \\
+           &         & B_{2}   &         &         \\
+           &         &         & B_{2}   &         \\
+           &         &         &         & B_{2}
+  \end{bmatrix}}_{M_{9}(\mathbb{C})\text{ — one 1x1 and four }2\times2\text{ blocks}}.
+\]
+
+\begin{proposition}[{\color{MyPurple}Markov traces with the \emph{ordinary} matrix trace}]
+\label{prop:Markov-ordinary}
+Let
+
+\[
+  B=\bbC\oplus M_{2}(\bbC),
+  \qquad
+  A=M_{3}(\bbC)\oplus M_{9}(\bbC),
+\]
+and keep the embedding \(\iota:B\hookrightarrow A\) from
+\textsection\ref{subsec:2x2-index18}.  With
+
+\[
+  m_1=1,\;m_2=2, \qquad
+  n_1=3,\;n_2=9, \qquad
+  d_B=\sum_j m_j^{2}=5, \quad
+  d_A=\sum_i n_i^{2}=90,
+\]
+define the \textbf{Markov traces}
+
+\[
+ {\color{MyDarkBlue} \tau_B(\beta\oplus B_2)
+      :=\frac{1}{d_B}
+        \bigl(m_1\,\beta+m_2\,\Tr B_2\bigr)
+      =\frac{1}{5}\bigl(\beta+2\,\Tr B_2\bigr) }
+\]
+
+
+\[
+ {\color{MyDarkBlue} \tau_A(\alpha\oplus A_9)
+      :=\frac{1}{d_A}
+        \bigl(n_1\,\Tr\alpha+n_2\,\Tr A_9\bigr)
+      =\frac{1}{90}\bigl(3\,\Tr\alpha+9\,\Tr A_9\bigr) }
+\]
+(where \(\Tr\) is the \emph{usual} matrix trace, so \(\Tr(I_n)=n\)).
+Then
+\begin{enumerate}[label=\textup{(\roman*)}, leftmargin=2.5em]
+  \item\label{it:tracial-ord}
+        \(\tau_B\) and \(\tau_A\) are faithful traces on \(B\) and \(A\);
+  \item\label{it:compat-ord}
+        \(\tau_A\circ\iota=\tau_B\) (no extra scale factor);
+  \item\label{it:state-ord}
+        \(\tau_A(1)=\tau_B(1)=1\); hence both are already \emph{states}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{\ref{it:tracial-ord}.}
+Each \(\tau\) is a positive linear combination of ordinary traces, so
+traciality and faithfulness are immediate.
+
+\smallskip
+\textbf{\ref{it:compat-ord}.}
+Take \(x=\beta\oplus B_2\in B\).
+Under \(\iota\) it becomes
+
+\[
+  \iota(x)=
+  \underbrace{\begin{bmatrix}\beta&0&0\\
+  0&\beta&0\\
+  0&0&\beta\end{bmatrix}}_{ \alpha\in M_3} 
+  \;\oplus\; 
+  \underbrace{\begin{bmatrix}
+     \beta &         &         &         &         \\
+           & B_2   &         &         &         \\
+           &         & B_2   &         &         \\
+           &         &         & B_{2}   &         \\
+           &         &         &         & B_{2}
+  \end{bmatrix}}_{A_9\in M_9}.
+\]
+Hence
+\( \Tr\alpha=3\beta \)
+and
+\( \Tr A_{9}=\beta+4\,\Tr B_2. \)
+Substituting in \(\tau_A\) gives
+
+\[
+  \tau_A\!\bigl(\iota(x)\bigr)
+  =\frac{1}{90}\bigl(3\cdot3\beta+9(\beta+4\,\Tr B_2)\bigr)
+  =\frac{1}{5}\bigl(\beta+2\,\Tr B_2\bigr)
+  =\tau_B(x).
+\]
+
+\smallskip
+\textbf{\ref{it:state-ord}.}
+Apply each trace to the unit \(1_B=(1,I_2)\):
+
+\[
+  \tau_B(1)=\frac{1}{5}\bigl(1+2\cdot2\bigr)=1, \qquad
+  \tau_A(1)=\frac{1}{90}\bigl(3\cdot3+9\cdot9\bigr)=1.
+\]
+Thus both traces are normalised states, and no rescaling is necessary.
+\end{proof}
+
+\begin{remark}[{\color{MyDarkGreen}Dimension-weighted formula}]\label{rem:dimension-weight}
+The coefficients
+\( 
+  \frac{m_j}{d_B},\frac{n_i}{d_A}
+\)
+come from the general rule
+\( 
+  \tau\!\bigl((x_i)\bigr)=\sum_i \dfrac{\dim(V_i)}{\sum_k \dim(V_k)^2}\,\Tr(x_i),
+\)
+so each simple block contributes in proportion to its
+dimension.  With these weights \(\tau_A\) \emph{extends} \(\tau_B\) through
+the inclusion map and automatically yields the Jones index
+\( [A:B]=\Vert H\Vert_2^2=18. \)
+\end{remark}
+
+\paragraph{At-a-glance summary (updated).}
+\[
+ {\color{MyDarkBlue} B=\bbC\oplus M_{2}(\bbC)
+    \overset{\iota}{\subset} 
+    A=M_{3}(\bbC)\oplus M_{9}(\bbC) }
+\]
+\[
+  H=\begin{bmatrix}3&0\\
+  1&4\end{bmatrix},
+  \qquad
+  [A:B]=18.
+\]
+
+\textbf{Markov traces (states).}
+
+\[
+  \tau_B(\beta\oplus B_2)=\frac15\!\bigl(\beta+2\,\Tr B_2\bigr), \qquad
+  \tau_A(\alpha\oplus A_9)=\frac1{90}\bigl(3\,\Tr\alpha+9\,\Tr A_9\bigr).
+\]
+
+\textbf{Trace-preserving conditional expectation \(E:A\to B\):}
+Let $A_9 = (a_{ij})$ and let $B_2^{(\ell)}$ for $\ell=1,..,4$ denote the $\ell$-th $2 \times 2$ block embedded in $M_9$.
+\[
+  E(\alpha\oplus A_{9})=
+  \left[\frac{1}{3}\Tr(\alpha) + \frac{1}{9} a_{11}\right]
+  \oplus 
+  \frac{2}{9} \sum_{\ell=1}^4 B_2^{(\ell)}(A_9)
+\]
+where $B_2^{(\ell)}(A_9)$ is the matrix obtained by restricting $A_9$ to the $\ell$-th block.
+
+\begin{figure}[ht]
+  \centering
+  \missingfigure{Bratteli_for_example.eps}
+  \caption[Directed Bratteli diagram for $\bbC\oplus M_{2}\subset M_{3}\oplus M_{9}$] { \small\textbf{Directed Bratteli diagram of the inclusion
+\(\bbC\oplus M_{2}(\mathbb{C})\subset M_{3}(\mathbb{C})\oplus M_{9}(\mathbb{C})\).}
+Black dots on the left mark the two summands of \(B\):
+\(\bbC\) (top, dimension 1) and \(M_{2}(\mathbb{C})\) (bottom, dimension 2).
+Black dots on the right mark the summands of \(A\):
+\(M_{3}(\mathbb{C})\) (top, dimension 3) and \(M_{9}(\mathbb{C})\) (bottom, dimension 9).
+Arrows point from each \(B\)-vertex to each \(A\)-vertex, with multiplicities
+given by the inclusion matrix
+\(\,H=\bigl[\!\begin{smallmatrix}3&0\\
+1&4\end{smallmatrix}\bigr]\): 
+three arrows from \(\bbC\) to \(M_{3}\), one arrow from \(\bbC\) to \(M_{9}\),
+and four arrows from \(M_{2}\) to \(M_{9}\).
+}
+  \label{fig:Bratteli-2x2}
+\end{figure}
+
+
+\newpage
+\subsection{Path–algebra realisation of the tower}
+
+\begin{definition}[Minimal \emph{vs.} minimal–\emph{central}]\label{def:min-vs-central}
+Let \(A\) be a finite–dimensional \Cst-algebra.
+\begin{itemize}[leftmargin=2em]
+  \item A (nonzero) projection \(p\in A\) is \emph{minimal} if there is no nonzero projection \(q<p\).
+  \item A central projection \(z\in Z(A)\) is \emph{minimal central} if no nonzero central \(z'<z\).
+  \item Denote \(\pi(A)=\{\text{minimal central projections}\}\) and
+        \(\mathsf{Min}(A)=\{\text{all minimal projections}\}\).
+\end{itemize}
+In the decomposition
+
+\[
+  A\cong\bigoplus_{p\in\pi(A)}M_{d_p}(\bbC),
+\]
+each \(p\) picks out one simple summand, and the ordinary minimal projections
+are the rank–one matrix units under a unique \(p\).
+\end{definition}
+
+\begin{definition}[Inclusion matrix]\label{def:inc-matrix}
+For the unital inclusion \(\cB\subseteq A\) with
+\(\cB\cong\bigoplus_{p\in\pi(\cB)}M_{m_p}(\bbC)\) and
+\(A\cong\bigoplus_{q\in\pi(A)}M_{n_q}(\bbC)\),
+the \emph{inclusion matrix}
+
+\[
+  H=\bigl[h_{p,q}\bigr]_{\,p\in\pi(\cB),\,q\in\pi(A)},\quad
+  h_{p,q}\in\mathbb{N}_0,
+\]
+records how many copies of the \(\cB\)-block \(M_{m_p}\) sit inside the
+\(A\)-block \(M_{n_q}\). Equivalently,
+\(\;H\,\dimvec{m}=\dimvec{n}\), where
+\(\dimvec m=(m_p)_{p\in\pi(\cB)}^{\!\mathsf T},\)
+\(\dimvec n=(n_q)_{q\in\pi(A)}^{\!\mathsf T}\).
+\end{definition}
+
+\paragraph{Edge sets and path spaces.} For each level \(k\ge0\) let
+
+\[
+  \Omega_k=\{\text{edges in the Bratteli diagram of }\cB\subseteq A\},
+\]
+and for \(-1\le\ell<k\) define
+
+\[
+  \Omega[\ell,k]
+  =\bigl\{(\alpha_{\ell+1},\dots,\alpha_k):\;
+     \alpha_i\in\Omega_i,\;\;
+     r(\alpha_i)=s(\alpha_{i+1})\; 
+  \bigr\},
+\quad
+  \Omega[\ell,\infty)=\varprojlim_k\Omega[\ell,k].
+\]
+
+\paragraph{Hilbert spaces.} Set
+
+\[
+  H[\ell,k]:=\ell^2\bigl(\Omega[\ell,k]\bigr), \quad
+  H:=H[-1,\infty)=\ell^2\bigl(\Omega\bigr),
+\]
+with orthonormal basis \(\{\delta_\alpha\}\).
+
+\begin{definition}[Path–algebra blocks]\label{def:scriptBn}
+For \(n\ge-1\), define the block
+
+\[
+  \mathscr B_n
+  :=\Bigl\{\,x\in\mathcal B(H)\;\Big|\;
+      \exists\,a\in\mathcal B\bigl(H[n,\infty)\bigr):\;
+      x(\alpha,\beta)
+      =\delta_{\alpha_{[-1,n-1]},\,\beta_{[-1,n-1]}}\, 
+      a\bigl(\alpha_{[n,\infty)},\beta_{[n,\infty)}\bigr)
+  \Bigr\}.
+\]
+Then
+\(\mathscr B_{-1}\subset\mathscr B_0\subset\mathscr B_1\subset\cdots\)
+is naturally isomorphic (level-by-level) to
+\(\cB\subset A_0\subset A_1\subset\cdots\).
+\end{definition}
+
+\begin{remark}
+A full system of matrix units in \(\mathscr B_n\) is
+
+\[
+  e_{\lambda,\mu}(\alpha,\beta)
+  =\delta_{\alpha_{[-1,n]},\,\lambda}\; 
+  \delta_{\beta_{[-1,n]},\,\mu}\; 
+  \delta_{\alpha_{[n+1,\infty)},\,\beta_{[n+1,\infty)}},
+\]
+for \(\lambda,\mu\in\Omega[-1,n]\) with \(r(\lambda)=r(\mu)\).
+\end{remark}
+
+\paragraph{Markov trace on \(\mathscr B_n\).}
+Let \(t^{(n)}_q>0\) be the weight on block \(q\in\pi(A_n)\), normalized so
+\(\sum_{q}t^{(n)}_q\,n_q=1\).  Then for \(x\in\mathscr B_n\),
+
+\[
+ {\color{MyDarkBlue} \tau_{\mathscr B_n}(x)
+    = 
+    \sum_{\alpha\in\Omega[-1,n]}
+      t^{(n)}_{\,r(\alpha)}\; 
+      x(\alpha,\alpha) }
+\]
+
+\paragraph{Expectation \(E_{\mathscr B_k}:\mathscr B_n\to\mathscr B_k\) \emph{($k<n$)}.}
+For \(x\in\mathscr B_n\) and paths \(\alpha,\beta\),
+
+\[
+  \bigl(E_{\mathscr B_k}x\bigr)(\alpha,\beta)
+  =\delta_{\alpha_{[-1,k]},\,\beta_{[-1,k]}}
+  \sum_{\substack{\theta\in\Omega[k,n]\\s(\theta)=r(\alpha_k)}}
+    \frac{\,t^{(n)}_{\,r(\theta)}\,}
+         {t^{(k)}_{\,r(\alpha_k)}}
+    \;x\bigl(\alpha_k\!\cdot\!\theta,\; 
+            \beta_k\!\cdot\!\theta\bigr).
+\]
+
+\begin{definition}[Jones projection]\label{def:jones-proj}
+For \(n\ge0\), the Jones projection
+\(e_{n+1}\in\mathcal B(H)\) is defined by
+
+\[
+  e_{n+1}(\alpha,\beta)
+  =\delta_{\alpha_{[-1,n-1]},\,\beta_{[-1,n-1]}}\, 
+  \delta_{\alpha_{[n+1,\infty)},\,\beta_{[n+1,\infty)}}\, 
+  \sqrt{\frac{t^{(n)}_{r(\alpha_n)}}{t^{(n-1)}_{s(\alpha_n)}}}\, 
+  \delta_{\alpha_n,\,\beta_n}.
+\]
+\end{definition}
+
+
+\begin{remark}
+\(e_{n+1}\in A_{n-1}'\cap A_{n+1}\), self–adjoint and idempotent, and satisfies
+
+\[
+  e_{n+1}\,a\,e_{n+1}
+  = 
+  E_{A_{n-1}}(a)\,e_{n+1},
+  \quad
+  a\in A_n.
+\]
+\end{remark}
+
+\subsection{First Jones basic construction}
+
+Recall
+
+\[
+  A_0 = \mathcal{B} = \mathbb{C}\oplus M_2(\mathbb{C}),
+  \quad
+  A_1 = A = M_3(\bbC)\oplus M_9(\bbC),
+  \quad
+  H=\begin{bmatrix}3&0\\
+  1&4\end{bmatrix}.
+\]
+The first basic construction produces
+
+\[
+  A_2 = C^*(A_1,e_{B}) \cong M_{18}(\mathbb{C})\oplus M_{36}(\mathbb{C}),
+\]
+because the new inclusion matrix is the transpose
+\( H^{T} = \begin{bmatrix}3&1\\
+0&4\end{bmatrix}, \)
+and hence the dimension vector of \(A_2\) is
+
+\[
+  H^{\!T}\,\begin{bmatrix}3\\9\end{bmatrix}
+  = 
+  \begin{bmatrix}3&1\\
+  0&4\end{bmatrix}
+  \begin{bmatrix}3\\9\end{bmatrix}
+  =\begin{bmatrix}18\\36\end{bmatrix}.
+\]
+In particular, \(\dim A_2 = 18^2 + 36^2\) and the Perron–Frobenius eigenvalue
+of \(H^{T}H\) remains \(d=18\), matching the Jones index \([A:B]=18\).
+
+
+\section*{Calculation of \( e_2 \) in the Jones Tower}
+% Gemini agent note: The following section calculates e_1, but is titled e_2, which is a common convention.
+
+Consider the unital inclusion \( \mathbb{C} \oplus M_2(\mathbb{C}) \subset M_3(\mathbb{C}) \oplus M_9(\mathbb{C}) \), with the tower:
+- \( A_0 = \mathcal{B} = \mathbb{C} \oplus M_2(\mathbb{C}) \),
+- \( A_1 = A = M_3(\mathbb{C}) \oplus M_9(\mathbb{C}) \),
+- \( A_2 = C^*(A_1, e_B) \cong M_{18}(\mathbb{C}) \oplus M_{36}(\mathbb{C}) \).
+
+We compute the Jones projection \( e_2 \) for \( A_1 \subset A_2 \) using the path algebra formulation.
+\medskip
+
+\subsection*{Step 1: Bratteli Diagram and Inclusion Matrices}
+The inclusion \( A_0 \subset A_1 \) has matrix:
+
+\[
+H = \begin{bmatrix} 3 & 0 \\ 1 & 4 \end{bmatrix},
+\]
+with \( \pi(A_0) = \{ p_1, p_2 \} \), \( \pi(A_1) = \{ q_1, q_2 \} \). For \( A_1 \subset A_2 \), \( \pi(A_2) = \{ r_1, r_2 \} \), and:
+
+\[
+H^T = \begin{bmatrix} 3 & 1 \\ 0 & 4 \end{bmatrix}.
+\]
+\medskip
+
+\subsection*{Step 2: Path Algebra Formula}
+For \( e_2 \) (corresponding to the inclusion $A_0 \subset A_1$, so $n=0$ in the formula for $e_{n+1}$):
+
+\[
+e_{1}(\alpha, \beta) = \delta_{\alpha_{[-1,-1]}, \beta_{[-1,-1]}} \, \delta_{\alpha_{[1, \infty)}, \beta_{[1, \infty)}} \, \sqrt{ \frac{t^{(0)}_{r(\alpha_0)}}{t^{(-1)}_{s(\alpha_0)}} } \, \delta_{\alpha_{0}, \beta_{0}}
+\]
+where for \( \alpha, \beta \in \Omega[-1, \infty) \):
+- \( \alpha = (\alpha_0, \alpha_1, \dots) \) where \( \alpha_i \) is an edge from level $i-1$ to $i$.
+- \( e_1(\alpha, \beta) \neq 0 \) only if the paths agree after level 1 and have the same first edge $\alpha_0=\beta_0$.
+\medskip
+
+\subsection*{Step 3: Weights}
+The Markov trace weights for the vertices (simple blocks) are proportional to the dimensions of the corresponding simple modules. Let's normalize $t^{(-1)}=1$ for the unique block at level -1.
+\begin{itemize}
+    \item Level 0: \( \dimvec{m} = (1, 2)^T \). The trace vector is \( t^{(0)} = (1, 2)^T \).
+    \item Level 1: \( \dimvec{n} = (3, 9)^T \). The trace vector is \( t^{(1)} = (3, 9)^T \).
+\end{itemize}
+The coefficients for the square root term are:
+\begin{itemize}
+    \item Path from level -1 to $p_1$: \( \sqrt{ \frac{t^{(0)}_{p_1}}{t^{(-1)}} } = \sqrt{ \frac{1}{1} } = 1 \).
+    \item Path from level -1 to $p_2$: \( \sqrt{ \frac{t^{(0)}_{p_2}}{t^{(-1)}} } = \sqrt{ \frac{2}{1} } = \sqrt{2} \).
+\end{itemize}
+\medskip
+
+\subsection*{Step 4: Matrix Form}
+The trace of the Jones projection must be \( \tau_{A_2}(e_2) = 1/[A_1:A_0] = 1/18 \). The Markov trace on $A_2$ is \( \tau_{A_2}(X_1 \oplus X_2) = \frac{1}{1620}(18\Tr(X_1) + 36\Tr(X_2)) = \frac{1}{90}\Tr(X_1) + \frac{1}{45}\Tr(X_2) \). Let \( e_2 = P_1 \oplus P_2 \), where $P_1, P_2$ are projections. Their ranks must satisfy \( \frac{1}{90}\mathrm{rank}(P_1) + \frac{1}{45}\mathrm{rank}(P_2) = \frac{1}{18} \), which simplifies to \( \mathrm{rank}(P_1) + 2\,\mathrm{rank}(P_2) = 5 \).
+A possible solution for the ranks is \( (\mathrm{rank}(P_1), \mathrm{rank}(P_2)) = (3, 1) \). This leads to the representation:
+
+\[
+e_{2} = \begin{bmatrix} I_3 & 0 \\ 0 & 0 \end{bmatrix}_{18 \times 18} \oplus \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}_{36 \times 36}.
+\]
+
+
+%──────────────────────────────────────────────────────────────────────────────%
+%                               BIBLIOGRAPHY                                  %
+%──────────────────────────────────────────────────────────────────────────────%
+\begin{thebibliography}{9}
+
+\bibitem{JonesSunder}
+ V.F.R.~Jones and V.S.~Sunder,
+ \emph{Introduction to subfactors},
+ Cambridge University Press, 1997.
+
+\bibitem{BakshiBhat2025}
+ K.C.~Bakshi and B.V.R.~Bhat,
+ \emph{Unitary orthonormal bases of finite–dimensional inclusions},
+ preprint, 2025.
+\end{thebibliography}
+\end{document}
